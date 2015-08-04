@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+	<html lang="en">
+	<head>
+	  <meta charset="utf-8">
+	  <title>jQuery UI Slider - Range with fixed minimum</title>
+	  <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+	  <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+	  <script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+<!--	  <link rel="stylesheet" href="/resources/demos/style.css"> -->
+	  <script>
+	  $(function yo() {
+	    $( "#slider-range-min" ).slider({
+	      range: "min",
+	      value: 3,
+	      min: 0,
+	      max: 6,
+	      slide: function( event, ui ) {
+	        $( "#amount" ).val( ui.value );
+	        console.log($("hours").val());
+	        myFunction((ui.value/6)*100);
+	      }
+	    });
+	    $( "#amount" ).val($( "#slider-range-min" ).slider( "value" ) );
+	  });
+	  </script>
+	</head>
+	<body onload="myFunction(50)">
+		<form action="">
+			Enter the total # of hours for today: <input type="text" id="hours" value="6"><br>
+		</form>
+		<form name="input" action="">
+			Enter the total # of hours for today: <input type="text" name="hours" val="6">
+			<input type="submit" value="Submit">
+		</form>
+		<p>
+		  <label for="amount">Total Number of Non-Distraction Hours:</label>
+		  <input type="text" id="amount" style="border:0; color:#f6931f; font-weight:bold;">
+		</p>
+		<div id="slider-range-min"></div>
+		<script>
+			function myFunction(percentNon)
+			{
+				var nonData = [2, 1, 3, 2];
+				var distractData = [3, 4];
+				var total = 6;
+				var counter = 5; // positive is bad while negative is good
+		//		var percentNon = 70; max change +15 and -5
+		// how many days straight can a person procrastinate?
+		// margin of error when to modify counter on the other part of app
+
+		/*		if (counter > 0)
+				{
+					percentNon += counter*3;
+					if (percentNon > 100)
+						percentNon = 100;
+				}
+				else if (counter < 0)
+				{
+					percentNon -= counter;
+					if (percentNon < 0)
+						percentNon = 0;
+				} */
+
+				if (counter > 0)
+				{
+					percentNon += counter*4*Math.pow(0.9, counter - 1);
+					if (percentNon > 100)
+						percentNon = 100;
+				}
+				else if (counter < 0)
+				{
+					percentNon -= counter*2*Math.pow(0.9, counter - 1);
+					if (percentNon < 0)
+						percentNon = 0;
+				}
+
+				console.log(percentNon);
+
+				var nonDistract = total*(percentNon*.01);
+				var distract = total*(1-percentNon*.01);
+				
+				var nonTotal = 0.0;
+				var distractTotal = 0.0;
+				for (var i = 0; i < nonData.length; i++) {
+					nonTotal += nonData[i];
+				}
+				for (var i = 0; i < distractData.length; i++) {
+					distractTotal += distractData[i];
+				}
+				
+				var newNon = new Array();
+				var newDistract = new Array();
+				for (var i = 0; i < nonData.length; i++) {
+					newNon[i] = nonDistract * (nonData[i]/nonTotal);
+				}
+				for (var i = 0; i < distractData.length; i++) {
+					newDistract[i] = distract * (distractData[i]/distractTotal);
+				}
+				console.log(newNon);
+				console.log(newDistract);
+			}
+		</script>
+
+	</body>
+</html> 

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+	<body>
+		<form name="input" action="onload()">
+			Search for Picture: <input type="text" id="query">
+			<input type="submit" value="Submit" onclick="show()">
+		</form>
+		<script>
+		var lol;
+    function onload() { 
+        lol = document.getElementById('query').value;
+    }
+			function show()
+			{
+				console.log(lol);
+			}
+		</script>
+	</body>
+</html>

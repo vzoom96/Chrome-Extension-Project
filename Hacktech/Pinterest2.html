@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>	
+	<head>
+		<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+	  <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+	  <script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+<!--	  <link rel="stylesheet" href="/resources/demos/style.css"> -->
+
+		<script type="text/javascript">
+		    var lol;
+		    function onload() { 
+		        lol = document.getElementById('lolz').value;
+		    }
+		    function show(){
+		    	lol = document.getElementById('lolz').value;
+		        console.log(lol);
+		    }
+		    
+		</script>
+	</head>
+
+	<body onload="onload();">
+	    <input type="text" name="enter" class="enter" value="" id="lolz"/>
+	    <input type="button" id="butt" value="click" onclick="show()"/>
+	    <script src="load.js">
+	    	
+	    </script>
+	</body>
+</html>
